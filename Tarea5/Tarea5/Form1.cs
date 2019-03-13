@@ -17,14 +17,9 @@ namespace Tarea5
             InitializeComponent();
         }
 
-        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
-        private void procesosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           FuncYProc fp = new FuncYProc();
+        private void procesosToolStripMenuItem_Click_1(object sender, EventArgs e) {
+            FuncYProc fp = new FuncYProc();
             fp.ShowDialog();
         }
 
@@ -38,6 +33,10 @@ namespace Tarea5
         {
             Agregar fa = new Agregar();
             fa.ShowDialog();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
         }
     }
 }
