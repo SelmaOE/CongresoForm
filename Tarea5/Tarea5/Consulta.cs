@@ -15,6 +15,7 @@ namespace Tarea5
         private GestorBD.GestorBD GestorBD;
         private DataSet dsAutor = new DataSet();
         private string cadSql;
+        Varios.Comunes comunes = new Varios.Comunes();
         public Consulta()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace Tarea5
             cadSql = "select * from T4Autor";
             GestorBD.consBD(cadSql, dsAutor, "Autor");
             dtgGeneral.DataSource = dsAutor.Tables["Autor"];
-            Comunes.cargaCombo(cboAutor, dsAutor, "Autor", "Nombre");
+            comunes.cargaCombo(cboAutor, dsAutor, "Autor", "Nombre");
 
            
         }

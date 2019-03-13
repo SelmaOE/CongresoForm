@@ -24,20 +24,20 @@ namespace Tarea5
 
         private void procesosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // FuncionYProcesos fp = new FuncionYProcesos();
-            //fp.ShowDialog();
+           FuncYProc fp = new FuncYProc();
+            fp.ShowDialog();
         }
 
         private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Consulta fc = new Consulta();
-            //fc.ShowDialog();
+            Consulta fc = new Consulta();
+            fc.ShowDialog();
         }
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Agregar fa = new Agregar();
-            //fa.ShowDialog();
+            Agregar fa = new Agregar();
+            fa.ShowDialog();
         }
     }
 }
