@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Consulta));
             this.dtgGeneral = new System.Windows.Forms.DataGridView();
             this.cboAutor = new System.Windows.Forms.ComboBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
@@ -41,13 +40,13 @@
             this.dtgGeneral.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgGeneral.Location = new System.Drawing.Point(31, 27);
             this.dtgGeneral.Name = "dtgGeneral";
-            this.dtgGeneral.Size = new System.Drawing.Size(319, 155);
+            this.dtgGeneral.Size = new System.Drawing.Size(327, 155);
             this.dtgGeneral.TabIndex = 0;
             // 
             // cboAutor
             // 
             this.cboAutor.FormattingEnabled = true;
-            this.cboAutor.Location = new System.Drawing.Point(31, 291);
+            this.cboAutor.Location = new System.Drawing.Point(31, 212);
             this.cboAutor.Name = "cboAutor";
             this.cboAutor.Size = new System.Drawing.Size(121, 21);
             this.cboAutor.TabIndex = 1;
@@ -56,7 +55,7 @@
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Location = new System.Drawing.Point(172, 291);
+            this.dtpFecha.Location = new System.Drawing.Point(158, 213);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(200, 20);
             this.dtpFecha.TabIndex = 2;
@@ -65,9 +64,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(384, 324);
+            this.ClientSize = new System.Drawing.Size(392, 260);
             this.Controls.Add(this.dtpFecha);
             this.Controls.Add(this.cboAutor);
             this.Controls.Add(this.dtgGeneral);

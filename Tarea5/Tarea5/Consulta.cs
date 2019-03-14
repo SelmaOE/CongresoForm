@@ -13,7 +13,7 @@ namespace Tarea5
     public partial class Consulta : Form
     {
         private GestorBD.GestorBD GestorBD;
-        private DataSet dsAutor = new DataSet();
+        private DataSet dsAutor = new DataSet(), dsArticulo = new DataSet();
         private string cadSql;
         Varios.Comunes comunes = new Varios.Comunes();
         public Consulta()
@@ -26,21 +26,30 @@ namespace Tarea5
         {
 
             //1- Hace la conexìón a la BD de Oracle.
-            GestorBD = new GestorBD.GestorBD("MSDAORA", "bd01", "linesp", "oracle");
+            GestorBD = new GestorBD.GestorBD("MSDAORA","bd01","linesp","oracle");
 
             //2- Obtiene y muestra los datos de los autores.
             cadSql = "select * from T4Autor";
-            GestorBD.consBD(cadSql, dsAutor, "Autor");
-            dtgGeneral.DataSource = dsAutor.Tables["Autor"];
-            comunes.cargaCombo(cboAutor, dsAutor, "Autor", "Nombre");
+            GestorBD.consBD(cadSql, dsAutor, "T4Autor");
+            //dtgGeneral.DataSource = dsAutor.Tables["Autor"];
+            comunes.cargaCombo(cboAutor, dsAutor, "T4Autor", "Nombre");
 
            
         }
 
+        // Una forma para que dado el nombre de un autor 
+        //(a través de un combo box) y una fecha (por medio de un DateTimePicker), 
+        //se muestren todos los artículos que ha presentado (o presentará) a partir de esa fecha, 
+        //detallando por cada artículo: co-autores, nombre de la institución en que trabaja el autor, 
+        //si el artículo fue financiado o no, nombre del congreso y fecha de presentación, 
+        //y total de congresos en que se ha presentado (incluidos en los que se presentará). 
 
         private void cboAutor_SelectedIndexChanged(object sender, EventArgs e)
         {
             cadSql = "";
+            GestorBD.consBD(cadSql, dsArticulo, "Articulo");
+            dtgGeneral.DataSource = dsArticulo.Tables["Articulo"];
+
         }
     }
 }

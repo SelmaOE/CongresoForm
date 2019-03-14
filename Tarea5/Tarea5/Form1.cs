@@ -31,12 +31,17 @@ namespace Tarea5
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Agregar fa = new Agregar();
-            fa.ShowDialog();
+          
         }
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
+        }
+
+        private void artículoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Agregar fa = new Agregar();
+            fa.ShowDialog();
         }
     }
 }

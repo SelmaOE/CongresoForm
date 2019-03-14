@@ -15,3 +15,13 @@ C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.exe
 C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.pdb
 C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.exe
 C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.pdb
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\Tarea5.exe
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\Tarea5.pdb
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\GestorBD.dll
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\GestorBD.pdb
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.csprojResolveAssemblyReference.cache
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Consulta.resources
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Form1.resources
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.FuncYProc.resources
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Properties.Resources.resources
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.csproj.GenerateResource.Cache
