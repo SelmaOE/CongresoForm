@@ -13,3 +13,5 @@ C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\GestorBD.dll
 C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\bin\Debug\GestorBD.pdb
 C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.exe
 C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.pdb
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.exe
+C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.pdb
