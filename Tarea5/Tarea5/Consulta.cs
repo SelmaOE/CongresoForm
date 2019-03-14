@@ -12,9 +12,9 @@ namespace Tarea5
 {
     public partial class Consulta : Form
     {
-        private GestorBD.GestorBD GestorBD;
-        private DataSet dsAutor = new DataSet(), dsArticulo = new DataSet();
-        private string cadSql;
+        GestorBD.GestorBD GestorBD;
+        DataSet dsAutor = new DataSet(), dsArticulo = new DataSet();
+        string cadSql;
         Varios.Comunes comunes = new Varios.Comunes();
         public Consulta()
         {
@@ -22,19 +22,16 @@ namespace Tarea5
         }
 
 
-        private void FrmGestorBD_Load(object sender, EventArgs e)
-        {
 
+        private void Consulta_Load(object sender, EventArgs e)
+        {
             //1- Hace la conexìón a la BD de Oracle.
-            GestorBD = new GestorBD.GestorBD("MSDAORA","bd01","linesp","oracle");
+            GestorBD = new GestorBD.GestorBD("MSDAORA", "bd01", "linesp", "oracle");
 
             //2- Obtiene y muestra los datos de los autores.
             cadSql = "select * from T4Autor";
             GestorBD.consBD(cadSql, dsAutor, "T4Autor");
-            //dtgGeneral.DataSource = dsAutor.Tables["Autor"];
             comunes.cargaCombo(cboAutor, dsAutor, "T4Autor", "Nombre");
-
-           
         }
 
         // Una forma para que dado el nombre de un autor 
@@ -46,9 +43,10 @@ namespace Tarea5
 
         private void cboAutor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cadSql = "";
+            /*cadSql = "";
             GestorBD.consBD(cadSql, dsArticulo, "Articulo");
             dtgGeneral.DataSource = dsArticulo.Tables["Articulo"];
+            */
 
         }
     }

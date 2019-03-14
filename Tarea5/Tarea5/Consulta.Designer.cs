@@ -48,16 +48,16 @@
             this.cboAutor.FormattingEnabled = true;
             this.cboAutor.Location = new System.Drawing.Point(31, 212);
             this.cboAutor.Name = "cboAutor";
-            this.cboAutor.Size = new System.Drawing.Size(121, 21);
+            this.cboAutor.Size = new System.Drawing.Size(149, 21);
             this.cboAutor.TabIndex = 1;
             this.cboAutor.Text = "Autor:";
             this.cboAutor.SelectedIndexChanged += new System.EventHandler(this.cboAutor_SelectedIndexChanged);
             // 
             // dtpFecha
             // 
-            this.dtpFecha.Location = new System.Drawing.Point(158, 213);
+            this.dtpFecha.Location = new System.Drawing.Point(186, 213);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(200, 20);
+            this.dtpFecha.Size = new System.Drawing.Size(172, 20);
             this.dtpFecha.TabIndex = 2;
             // 
             // Consulta
@@ -72,6 +72,7 @@
             this.Controls.Add(this.dtgGeneral);
             this.Name = "Consulta";
             this.Text = "Consulta";
+            this.Load += new System.EventHandler(this.Consulta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgGeneral)).EndInit();
             this.ResumeLayout(false);
 
