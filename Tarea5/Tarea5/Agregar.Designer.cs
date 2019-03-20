@@ -85,6 +85,7 @@
             this.Controls.Add(this.cboAutor);
             this.Name = "Agregar";
             this.Text = "Agregar";
+            this.Load += new System.EventHandler(this.Agregar_Load);
             this.ResumeLayout(false);
 
         }
