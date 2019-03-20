@@ -25,3 +25,4 @@ C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Form1.reso
 C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.FuncYProc.resources
 C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Properties.Resources.resources
 C:\Users\oracle\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.csproj.GenerateResource.Cache
+C:\Users\sdist.ITAM\Documents\CongresoForm\Tarea5\Tarea5\obj\Debug\Tarea5.Agregar.resources

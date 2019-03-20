@@ -88,16 +88,51 @@ namespace Tarea5 {
         
 
         private void button2_Click(object sender, EventArgs e) {
-            DataSet dsTemp = new DataSet();
-            DataRow fila;
+            string nomOrg, nomOrg2, res;
+            OleDbCommand procOrg;
+            OleDbParameter par;
 
-            cadSql = "declare Nom1 varchar(20); Nom2 varchar(20); m varchar(20);" +
-                    "begin Nom1:= '" + cboOrg.SelectedItem + "'; Nom2:= '" + cboOrg2.SelectedItem + "';" +
-                     "T4f(Nom1, Nom2, m); dbms_output.put_line(m); end;";
-            GestorBD.consBD(cadSql, dsTemp, "Temp");
-            fila = dsTemp.Tables["Temp"].Rows[1];
-            reslabel.Text = "Ha participado más: "+fila.ToString();
-            reslabel.Visible = true;
+            //1- Abrir la conexión a la BD.
+            cnOracle = new OleDbConnection("Provider=MSDAORA; Data Source=oracle.itam.mx;" +
+           "User ID=bd01;Password=linesp");
+            cnOracle.Open();
+            procOrg = new OleDbCommand();
+            procOrg.Connection = cnOracle;
+
+            //2- Especificar el llamado al procedimiento  (en general: al subprograma).
+            procOrg.CommandText = "T4F";
+            procOrg.CommandType = CommandType.StoredProcedure;
+
+            //3- Especificar los parámetros:
+            //a) primero todos los de entrada:
+            nomOrg = Convert.ToString(cboOrg.SelectedItem);    
+            par = new OleDbParameter("nombre1", nomOrg);
+            procOrg.Parameters.Add(par);
+
+            nomOrg2 = Convert.ToString(cboOrg2.SelectedItem);
+            par = new OleDbParameter("nombre2", nomOrg2);
+            procOrg.Parameters.Add(par);
+
+            //b) luego todos los de salida (uno en este caso):
+            par = new OleDbParameter("mayor", OleDbType.VarChar,
+              20, ParameterDirection.Output, false, 4, 0, "res", DataRowVersion.Current, 0);
+            procOrg.Parameters.Add(par);
+
+            //4- Ejecutar el procedimiento (en general: el subprograma).
+            try {
+                procOrg.ExecuteNonQuery();
+
+                //5- Recuperar el (los) valor(es) regresado(s) por medio del (de los)
+                //   parámetro(s) de salida.
+                res = Convert.ToString(procOrg.Parameters["mayor"].Value);
+                MessageBox.Show("La organización que más ha participado es: " + res);
+            }
+            catch (OleDbException err) {
+                MessageBox.Show(err.Message);
+            }
+
+            //6- Cerrar la conexión a la BD.
+            cnOracle.Close();
         }
 
 
