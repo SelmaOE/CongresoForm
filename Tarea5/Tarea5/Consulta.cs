@@ -13,15 +13,18 @@ namespace Tarea5
     public partial class Consulta : Form
     {
         GestorBD.GestorBD GestorBD;
-        DataSet dsAutor = new DataSet(), dsArticulo = new DataSet(), dsCoaut = new DataSet();
-        string cadSql;
+        DataSet dsAutor = new DataSet(), dsArticulo = new DataSet(), dsCoaut = new DataSet(), dsNoCong = new DataSet();
+        string cadSql, cadSql2;
         Varios.Comunes comunes = new Varios.Comunes();
         public Consulta()
         {
             InitializeComponent();
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
 
+        }
 
         private void Consulta_Load(object sender, EventArgs e)
         {
@@ -47,19 +50,39 @@ namespace Tarea5
             GestorBD.consBD(cadSql, dsArticulo, "Articulo");
             dtgGeneral.DataSource = dsArticulo.Tables["Articulo"];
             */
-            cadSql = "select a.nombre, o.nombre as Trabaja, art.nomArt as Articulo, c.nombre as Congreso, e.IdBeca, c.fechaIni " +
-                "from T4Autor a, T4Escribio e, T4Articulo art, T4Presentado p, T4Congreso c, T4ORganizacion o " +
-                " where  c.idCong = p.idCong and p.idArt = e.idArt and e.idAut = a.idAut " + 
-                "and e.idArt = art.idArt and a.idOrg = o.idOrg " +
-                "and a.idaut in (select a.idAut " + 
-                "from T4Escribio e, T4Autor a, T4Presentado p " +
-                " where p.idArt = e.idArt and e.idAut = a.idAut and fechaIni>'" + dtpFecha.Value.Day + "-" + dtpFecha.Value.Month +
-                "-" + dtpFecha.Value.Year + "' and p.idAut = (select p.idAut " +
-                "from T4Presentado p, T4Autor a " +
-                "where p.idAut = a.idAut and a.nombre='" + cboAutor.Text + "'))";
+            cadSql = "select a.nombre, o.nombre as Trabaja, art.nomArt as Articulo, c.nombre as Congreso, e.IdBeca, p.fecha " +
+               "from T4Autor a, T4Escribio e, T4Articulo art, T4Presentado p, T4Congreso c, T4ORganizacion o " +
+               "where  c.idCong = p.idCong and p.idArt = e.idArt and e.idAut = a.idAut " +
+               "and e.idArt = art.idArt and a.idOrg = o.idOrg " +
+               "and a.idaut in (select a.idAut " +
+               "from T4Escribio e, T4Autor a, T4Presentado p " +
+               "where p.idArt = e.idArt and e.idAut = a.idAut and p.fecha>='" + dtpFecha.Value.Day + "-" + dtpFecha.Value.Month +
+               "-" + dtpFecha.Value.Year + "' and p.idAut = (select p.idAut " +
+               "from T4Presentado p, T4Autor a " +
+               "where p.idAut = a.idAut and a.nombre='" + cboAutor.Text + "'))";
+
 
             GestorBD.consBD(cadSql, dsCoaut, "Coaut");
             dtgGeneral.DataSource = dsCoaut.Tables["Coaut"];
+
+
+            cadSql2 = "select count(unique idpresent) " +
+                "from T4Congreso c, T4Presentado p, T4Autor a " +
+                "where c.idCong = p.idCong " +
+                "and p.idaut in (select a.idAut " +
+                "from T4Escribio e, T4Autor a, T4Presentado p " +
+                "where p.idArt = e.idArt and e.idAut = a.idAut " +
+                "and p.idAut = (select p.idAut " +
+                "from T4Presentado p, T4Autor a " +
+                "where p.idAut = a.idAut and a.nombre ='" + cboAutor.Text + "'))";
+
+            GestorBD.consBD(cadSql2, dsNoCong, "NoCon");
+            dtgCong.DataSource = dsNoCong.Tables["NoCon"];
+
+            //GestorBD.consBD(cadSql2, dsCoaut, "Coaut");
+            //dtgGeneral.DataSource = dsCoaut.Tables["Coaut"];
+
+
 
         }
 
