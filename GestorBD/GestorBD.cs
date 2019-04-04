@@ -142,5 +142,94 @@ namespace GestorBD {
       return result;
     }
 
-  }
+        /*===========================================================================
+            RUTINAS PARA USAR CON TRANSACCIONES
+         ===========================================================================
+         Estas rutinas se utilizan para efectuar consultas y actualizaciones sobre una
+         base de datos dentro de una transacción.
+        */
+
+        /*Ejecuta una consulta sobre la BD dentro de una transacción. 
+          Parámetros de entrada: la transacción, la consulta y el nombre de la tabla resultante.
+          Parámetro de salida: el DataSet generado.
+         */
+        public void consBD(OleDbTransaction t, String cadSql, String tabla, System.Data.DataSet dsCons)
+        {
+            try
+            {
+                odaCons.SelectCommand =
+                  new OleDbCommand(cadSql, conex);     //Define la consulta.
+
+                //Es necesario asignar el objeto Transaction al comando en el DataAdapter.
+                odaCons.SelectCommand.Transaction = t;
+
+                if (!dsCons.Tables.Contains(tabla))
+                {     //Establece el
+                    dsCons.Tables.Add(tabla);               //nombre de la tabla resultante.
+                    odaCons.FillSchema(dsCons, SchemaType.Source, tabla);
+                }
+                dsCons.Clear();                //Borra resultados anteriores.
+                odaCons.Fill(dsCons, tabla);   //Ejecuta la consulta.
+            }
+            catch (OleDbException err)
+            {
+                Console.WriteLine(err.Message);
+            }
+        }
+
+        /*Efectúa una inserción de datos dentro de una transacción.
+          La transacción y la instrucción de inserción se dan como parámetros.
+          La rutina regresa OK o un código, si hubo error.
+         */
+        public int altaBD(OleDbTransaction t, String cadSql)
+        {
+            int cant, result;
+
+            try
+            {
+                odaAct.InsertCommand =
+                  new OleDbCommand(cadSql, conex);   //Define la inserción.
+
+                //Es necesario asignar el objeto Transaction al comando en el DataAdapter.
+                odaAct.InsertCommand.Transaction = t;
+
+                cant = odaAct.InsertCommand.ExecuteNonQuery();   //La ejecuta.
+                result = OK;
+            }
+            catch (OleDbException err)
+            {
+                Console.WriteLine(err.Message);
+                result = err.ErrorCode;
+            }
+            return result;
+        }
+
+        /*Efectúa un cambio de datos dentro de una transacción.
+          La transacción y la instrucción de cambio se dan como parámetros.
+          La rutina regresa OK o un código, si hubo error.
+         */
+        public int cambiaBD(OleDbTransaction t, String cadSql)
+        {
+            int cant, result;
+
+            try
+            {
+                odaAct.UpdateCommand =
+                  new OleDbCommand(cadSql, conex);   //Define la inserción.
+
+                //Es necesario asignar el objeto Transaction al comando en el DataAdapter.
+                odaAct.UpdateCommand.Transaction = t;
+
+                cant = odaAct.UpdateCommand.ExecuteNonQuery();   //La ejecuta.
+                result = OK;
+            }
+            catch (OleDbException err)
+            {
+                Console.WriteLine(err.Message);
+                result = err.ErrorCode;
+            }
+            return result;
+        }
+
+    }
 }
