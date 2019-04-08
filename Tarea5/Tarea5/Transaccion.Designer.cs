@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DtgGeneral = new System.Windows.Forms.DataGridView();
             this.BtnAlta = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,35 +37,36 @@
             this.dateCong = new System.Windows.Forms.DateTimePicker();
             this.cboArticulo = new System.Windows.Forms.ComboBox();
             this.cboAutor = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DtgGeneral)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // DtgGeneral
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(39, 35);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(521, 202);
-            this.dataGridView1.TabIndex = 0;
+            this.DtgGeneral.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DtgGeneral.Location = new System.Drawing.Point(39, 35);
+            this.DtgGeneral.Name = "DtgGeneral";
+            this.DtgGeneral.Size = new System.Drawing.Size(521, 202);
+            this.DtgGeneral.TabIndex = 0;
             // 
             // BtnAlta
             // 
-            this.BtnAlta.Location = new System.Drawing.Point(140, 388);
+            this.BtnAlta.Location = new System.Drawing.Point(108, 388);
             this.BtnAlta.Name = "BtnAlta";
-            this.BtnAlta.Size = new System.Drawing.Size(75, 23);
+            this.BtnAlta.Size = new System.Drawing.Size(143, 23);
             this.BtnAlta.TabIndex = 1;
-            this.BtnAlta.Text = "Botoncito";
+            this.BtnAlta.Text = "Alta de Nueva Conferencia";
             this.BtnAlta.UseVisualStyleBackColor = true;
-            this.BtnAlta.Click += new System.EventHandler(this.button1_Click);
+            this.BtnAlta.Click += new System.EventHandler(this.BtnAlta_Click);
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(411, 388);
+            this.btnActualizar.Location = new System.Drawing.Point(348, 388);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.Size = new System.Drawing.Size(149, 23);
             this.btnActualizar.TabIndex = 2;
-            this.btnActualizar.Text = "Botonsote";
+            this.btnActualizar.Text = "Actualizar Conferencia";
             this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // label2
             // 
@@ -75,7 +76,6 @@
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Horario:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtHor
             // 
@@ -83,7 +83,6 @@
             this.txtHor.Name = "txtHor";
             this.txtHor.Size = new System.Drawing.Size(100, 20);
             this.txtHor.TabIndex = 12;
-            this.txtHor.TextChanged += new System.EventHandler(this.txtHor_TextChanged);
             // 
             // cboCongreso
             // 
@@ -93,7 +92,6 @@
             this.cboCongreso.Size = new System.Drawing.Size(196, 21);
             this.cboCongreso.TabIndex = 11;
             this.cboCongreso.Text = "Congreso:";
-            this.cboCongreso.SelectedIndexChanged += new System.EventHandler(this.cboCongreso_SelectedIndexChanged);
             // 
             // dateCong
             // 
@@ -101,7 +99,6 @@
             this.dateCong.Name = "dateCong";
             this.dateCong.Size = new System.Drawing.Size(196, 20);
             this.dateCong.TabIndex = 10;
-            this.dateCong.ValueChanged += new System.EventHandler(this.dateCong_ValueChanged);
             // 
             // cboArticulo
             // 
@@ -114,7 +111,6 @@
             this.cboArticulo.TabIndex = 9;
             this.cboArticulo.Text = "Artículo:";
             this.cboArticulo.Visible = false;
-            this.cboArticulo.SelectedIndexChanged += new System.EventHandler(this.cboArticulo_SelectedIndexChanged);
             // 
             // cboAutor
             // 
@@ -139,10 +135,11 @@
             this.Controls.Add(this.cboAutor);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.BtnAlta);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DtgGeneral);
             this.Name = "Transaccion";
             this.Text = "Transaccion";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Transaccion_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DtgGeneral)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,7 +147,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DtgGeneral;
         private System.Windows.Forms.Button BtnAlta;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Label label2;
