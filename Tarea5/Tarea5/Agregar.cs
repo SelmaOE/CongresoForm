@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,15 @@ namespace Tarea5 {
     public partial class Agregar : Form {
         //Atributos de la clase.
         GestorBD.GestorBD GestorBD;
+        const int OK = 1;
         DataSet dsAut = new DataSet(), dsCong= new DataSet(), dsArt= new DataSet();
         string cadSql;
         Varios.Comunes comunes = new Varios.Comunes();
 
-        
+
+        //Para manejar el objeto de la transacción.
+        OleDbTransaction t;
+
         public Agregar() {
             InitializeComponent();
         }
@@ -51,40 +56,60 @@ namespace Tarea5 {
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            string aut, cong,art, fecha, hor;
-            aut = Convert.ToString(cboAutor.SelectedItem);
-            cong = Convert.ToString(cboCongreso.SelectedItem);
-            art = Convert.ToString(cboArticulo.SelectedItem);
-            fecha = Convert.ToString(dateCong.Value.Year+"-"+dateCong.Value.Month + "-" +dateCong.Value.Day).Trim();
-            hor = txtHor.Text;
-            //MessageBox.Show(hor);
-            if (checar(aut, cong, art, fecha, hor))
+            try
             {
-                DataSet dsTemp = new DataSet();
-                //ID'S NECESARIOS
-                cadSql= "select count(idpresent) from t4presentado";
-                GestorBD.consBD(cadSql, dsTemp, "T4presentado");
-                int idpresent = Convert.ToInt16(dsTemp.Tables["T4presentado"].Rows[0]["count(idpresent)"].ToString())+900;
+                GestorBD.conex.Open();         //Se conecta a la BD.
 
-                cadSql = "select * from t4congreso c where c.nombre='" + cong + "'";
-                GestorBD.consBD(cadSql, dsTemp, "T4congreso");
-                int idcong = Convert.ToInt16(dsTemp.Tables["T4congreso"].Rows[0]["idcong"].ToString());
+                //Se crea el objeto de transacción y se especifica el nivel de aislamiento.
+                t = GestorBD.conex.BeginTransaction(IsolationLevel.ReadCommitted);
 
-                cadSql = "select * from t4autor a where a.nombre='" + aut + "'";
-                GestorBD.consBD(cadSql, dsTemp, "T4autor");
-                int idaut =Convert.ToInt16(dsTemp.Tables["T4autor"].Rows[0]["idaut"].ToString());
-                //MessageBox.Show(idaut);
+                string aut, cong, art, fecha, hor;
+                aut = Convert.ToString(cboAutor.SelectedItem);
+                cong = Convert.ToString(cboCongreso.SelectedItem);
+                art = Convert.ToString(cboArticulo.SelectedItem);
+                fecha = Convert.ToString(dateCong.Value.Year + "-" + dateCong.Value.Month + "-" + dateCong.Value.Day).Trim();
+                hor = txtHor.Text;
+                //MessageBox.Show(hor);
+                if (checar(aut, cong, art, fecha, hor))
+                {
+                    DataSet dsTemp = new DataSet();
+                    //ID'S NECESARIOS
+                    cadSql = "select count(idpresent) from t4presentado";
+                    GestorBD.consBD(cadSql, dsTemp, "T4presentado");
+                    int idpresent = Convert.ToInt16(dsTemp.Tables["T4presentado"].Rows[0]["count(idpresent)"].ToString()) + 900;
 
-                cadSql = "select * from t4articulo a where a.nomart='" + art + "'";
-                GestorBD.consBD(cadSql, dsTemp, "T4articulo");
-                int idart =Convert.ToInt16( dsTemp.Tables["T4articulo"].Rows[0]["idart"].ToString());
+                    cadSql = "select * from t4congreso c where c.nombre='" + cong + "'";
+                    GestorBD.consBD(cadSql, dsTemp, "T4congreso");
+                    int idcong = Convert.ToInt16(dsTemp.Tables["T4congreso"].Rows[0]["idcong"].ToString());
 
-                //Agrega a la tabla t4presentado
-                cadSql = "insert into t4presentado values ("+idpresent+","+idcong+",'"+hor+"', date'"+fecha+"',"+idaut+","+idart+")";
-                GestorBD.altaBD(cadSql);
-                MessageBox.Show("Alta exitosa!");
-               
+                    cadSql = "select * from t4autor a where a.nombre='" + aut + "'";
+                    GestorBD.consBD(cadSql, dsTemp, "T4autor");
+                    int idaut = Convert.ToInt16(dsTemp.Tables["T4autor"].Rows[0]["idaut"].ToString());
+                    //MessageBox.Show(idaut);
+
+                    cadSql = "select * from t4articulo a where a.nomart='" + art + "'";
+                    GestorBD.consBD(cadSql, dsTemp, "T4articulo");
+                    int idart = Convert.ToInt16(dsTemp.Tables["T4articulo"].Rows[0]["idart"].ToString());
+
+                    //Agrega a la tabla t4presentado
+                    cadSql = "insert into t4presentado values (" + idpresent + "," + idcong + ",'" + hor + "', date'" + fecha + "'," + idaut + "," + idart + ")";
+                    if(GestorBD.altaBD(t, cadSql)== OK)
+                        MessageBox.Show("Alta exitosa!");
+                    else
+                        MessageBox.Show("No se pudo insertar la nueva tupla");
+
+                    t.Commit();        //Confirma la transacción.
+                }
             }
+            catch (OleDbException err)
+            {
+                MessageBox.Show(err.Message);
+                t.Rollback();      //Si hay error, revierte la transacción.
+            }
+
+            GestorBD.conex.Close();      //Cierra la conexión a la BD.
+            t = null;                       //Destruye el objeto de transacción.
+            MessageBox.Show("Terminé la transacción");
         }
 
         private bool checar(string autor, string congr,string art,string fecha,string horario)
