@@ -44,10 +44,5 @@ namespace Tarea5
             fa.ShowDialog();
         }
 
-        private void transaccionesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Transaccion t = new Transaccion();
-            t.ShowDialog();
-        }
     }
 }
